@@ -11,16 +11,23 @@ server <- function(input, output, session) {
   
   #### Load functions ---------------------------------------------------------------------------------------------------
   source("helpers/functions.R")
+  # source("helpers/DatabaseLoading.R")
+  # source("helpers/DescriptiveStat.R")
+  # source("helpers/Histo.R")
+  # source("helpers/NormalityTest.R")
+  # source("helpers/TolInt.R")
+  # source("helpers/Plots.R")
   
   #### LOAD DATABASE ----------------------------------------------------------------------------------------------------
   # Define a reactive variable to store the data from the uploaded file
   data <- reactive({
     # Use the require and readxl packages to read the uploaded file
-    require(readxl)
+    # require(readxl)
+    require(openxlsx)
     inFile <- input$file1
     if (is.null(inFile))
       return(NULL)
-    df <- read_excel(inFile$datapath)
+    df <- read.xlsx(inFile$datapath)
     return(df)
   })
 
@@ -266,4 +273,5 @@ server <- function(input, output, session) {
     SPEC()$histog
   })
  
+
 }
