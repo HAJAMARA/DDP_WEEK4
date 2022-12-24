@@ -2,7 +2,7 @@
 
 Course Project
 
-For more details, please see the pitch: https://user-images.githubusercontent.com/102218670/209428970-aacfff3c-8656-4a8f-9a85-ccbca4cf50bb.png
+For more details, please see the pitch: https://rpubs.com/HSA75/987043
 
 
 This **SpecLimits Calculator** RShiny app is built to facilitate the setting of those specification limits for process parameters having **at least** an historical of **20 batch results**.
