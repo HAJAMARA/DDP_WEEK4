@@ -15,12 +15,34 @@
 #    http://shiny.rstudio.com/                                           #
 #                                                                        #
 ##########################################################################
-
+#image = "SpecLim_Logo.png",
+library(shiny)
+library(shinyalert)
+library(shinydashboard)
+library(shinyWidgets)
+library(bs4Dash)
+library(fresh)
+library(pastecs)
+library(readxl)
+library(openxlsx)
+library(DT)
+library(plotly)
+library(tidyverse)
+library(dplyr)
+library(reshape2)
+library(ggplot2)
+library(data.table)
+library(tolerance)
+library(BH)
+# Sidebar width
+bs4dash_layout(
+  sidebar_width = "400px"
+)
 
 ui = dashboardPage(
   # title = "SpecLim Calculator",
   # fullscreen = TRUE,
-  
+
   header = dashboardHeader(
     title = dashboardBrand(
       title = "SpecLim Calculator",
@@ -38,7 +60,7 @@ ui = dashboardPage(
   
   sidebar = dashboardSidebar(
     expandOnHover = TRUE,
-    width = 300,
+    # width = 400,
     skin ="light",
     sidebarMenu(
       menuItem(
@@ -50,7 +72,7 @@ ui = dashboardPage(
           label = "Upload your xlsx file:",
           accept = c(".xlsx")
         )
-    ),
+      ),
       menuItem(
         "Settings",
         tabName = "Setings",
@@ -101,96 +123,137 @@ ui = dashboardPage(
       actionButton("run_button", "Run Analysis", icon = icon("play"))
       
     )),
+  
+  
+  
+  body = dashboardBody(
+    use_theme(create_theme(
+      bs4dash_layout(
+        sidebar_width = "400px"
+      )
+    )),
     
+    tabName = "Data",
     
-    
-    body = dashboardBody(
+    tabsetPanel(
       
-      tabName = "Data",
-      
-      tabsetPanel(
+      tabPanel(
+        # width = 12,
+        title = strong("Raw Data"),
+        id = "RawDescStat",
+        closable = TRUE,
+        height = "500px",
         
-        tabPanel(
-          # width = 12,
-          title = strong("Raw Data"),
-          id = "RawDescStat",
-          closable = TRUE,
-          height = "500px",
-          
-          "This tab displays the raw data of the uploaded file and the main descriptive statistics",
-          
-          fluidRow(
-            width = 4,
-            
-            box(
-              width = 12,
-              title = "Raw data",
-              dataTableOutput("contents") # Output: Data file
-            ),
-            box(
-              width = 12,
-              title = "Raw data Desc. Stat.",
-              dataTableOutput("summary")
-            )
-          )
-        ),
+        "This tab displays the raw data of the uploaded file and the main descriptive statistics",
         
-        tabPanel(
-          title = "Parameter Desc. Plots",
-          # column(4,
-                 box(
-                   width = NULL,
-                   title = "Boxplot",
-                   plotlyOutput("BoxPlot")
-                 ),
-                 box( 
-                   width = NULL,
-                   title = "Histogram",
-                   plotlyOutput("Histo")
-                 ),
-                 box( 
-                   width = NULL,
-                   title = "QQplot",
-                   plotlyOutput("QQplot")
-                 ),
-                 box( 
-                   width = NULL,
-                   title = "Shapiro-Wilk Test",
-                   dataTableOutput("Shapi")
-                 )
-          # )
-        ),
-        
-        tabPanel(
-          title = "Specification Limits",
+        fluidRow(
+          width = 4,
           
           box(
-            width = NULL,
-            title = "Specification Limits: Scatter Plot",
-            plotlyOutput("SPECSCATT")
+            width = 12,
+            title = "Raw data",
+            dataTableOutput("contents") # Output: Data file
           ),
           box(
-            width = NULL,
-            title = "Specification Limits: Histogram",
-            plotlyOutput("SPECHIST")
-          ),
-          box(
-            width = NULL,
-            title = "Specification Limits",
-            # tableOutput("SPECLIM")
-            DT::dataTableOutput("SPECLIM")
+            width = 12,
+            title = "Raw data Desc. Stat.",
+            dataTableOutput("summary")
           )
         )
+      ),
+      
+      tabPanel(
+        title = "Parameter Desc. Plots",
+        # column(4,
+        box(
+          width = NULL,
+          title = "Boxplot",
+          plotlyOutput("BoxPlot")
+        ),
+        box( 
+          width = NULL,
+          title = "Histogram",
+          plotlyOutput("Histo")
+        ),
+        box( 
+          width = NULL,
+          title = "QQplot",
+          plotlyOutput("QQplot")
+        ),
+        box( 
+          width = NULL,
+          title = "Shapiro-Wilk Test",
+          dataTableOutput("Shapi")
+        )
+        # )
+      ),
+      
+      tabPanel(
+        title = "Specification Limits",
+        
+        box(
+          width = NULL,
+          title = "Specification Limits: Scatter Plot",
+          plotlyOutput("SPECSCATT")
+        ),
+        box(
+          width = NULL,
+          title = "Specification Limits: Histogram",
+          plotlyOutput("SPECHIST")
+        ),
+        box(
+          width = NULL,
+          title = "Specification Limits",
+          # tableOutput("SPECLIM")
+          DT::dataTableOutput("SPECLIM")
+        )
       )
-    ),
-    
-    
+    )
+  ),
+  
+  # controlbar = bs4DashControlbar(
+  #   skin = "light",
+  #   pinned = TRUE,
+  #   collapsed = FALSE,
+  #   overlay = FALSE,
+  #   controlbarMenu(
+  #     id = "controlbarmenu",
+  # controlbarItem(title = "Data distribution",
+  #                column(
+  #                  width = 12,
+  #                  align = "left",
+  #                  radioButtons(
+  #                    inputId = "dist",
+  #                    label = "Distribution type:",
+  #                    c(
+  #                      "Normal" = "norm",
+  #                      "Log-normal" = "lnorm",
+  #                      "Unknown" = "unk"
+  #                    )
+  #                  )
+  #                )),
+  #     controlbarItem(
+  #       title = "Spec Limits Precision",
+  #       sliderInput(
+  #         inputId = "Dec",
+  #         label = "Specify the number of decimals of the spec. lim.",
+  #         min = 0,
+  #         max = 4,
+  #         value = 2
+  #       )
+  #     )
+  #   )
+  # ),
+  
   footer = dashboardFooter(
     left = a(
       href = "https://github.com/HAJAMARA/DDP_WEEK4",
       target = "_blank", "My github"
     ),
     right = "Author: HSA, DEC 2022")
-    
-  )
   
+)
+
+
+
+
