@@ -15,7 +15,7 @@
 #    http://shiny.rstudio.com/                                           #
 #                                                                        #
 ##########################################################################
-#image = "SpecLim_Logo.png",
+
 library(shiny)
 library(shinyalert)
 library(shinydashboard)
@@ -211,39 +211,6 @@ ui = dashboardPage(
     )
   ),
   
-  # controlbar = bs4DashControlbar(
-  #   skin = "light",
-  #   pinned = TRUE,
-  #   collapsed = FALSE,
-  #   overlay = FALSE,
-  #   controlbarMenu(
-  #     id = "controlbarmenu",
-  # controlbarItem(title = "Data distribution",
-  #                column(
-  #                  width = 12,
-  #                  align = "left",
-  #                  radioButtons(
-  #                    inputId = "dist",
-  #                    label = "Distribution type:",
-  #                    c(
-  #                      "Normal" = "norm",
-  #                      "Log-normal" = "lnorm",
-  #                      "Unknown" = "unk"
-  #                    )
-  #                  )
-  #                )),
-  #     controlbarItem(
-  #       title = "Spec Limits Precision",
-  #       sliderInput(
-  #         inputId = "Dec",
-  #         label = "Specify the number of decimals of the spec. lim.",
-  #         min = 0,
-  #         max = 4,
-  #         value = 2
-  #       )
-  #     )
-  #   )
-  # ),
   
   footer = dashboardFooter(
     left = a(
