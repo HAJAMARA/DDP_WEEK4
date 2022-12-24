@@ -2,6 +2,10 @@
 
 Course Project
 
+For more details, please see the pitch: RPubs - DDP_Assigment_WEEK4_Pitch_RShinyApp_HSA_DEC22
+![image](https://user-images.githubusercontent.com/102218670/209428970-aacfff3c-8656-4a8f-9a85-ccbca4cf50bb.png)
+
+
 This **SpecLimits Calculator** RShiny app is built to facilitate the setting of those specification limits for process parameters having **at least** an historical of **20 batch results**.
 
 In that case, the specifications limits assessment is based on the following statistical methodology:
