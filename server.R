@@ -11,12 +11,6 @@ server <- function(input, output, session) {
   
   #### Load functions ---------------------------------------------------------------------------------------------------
   source("helpers/functions.R")
-  # source("helpers/DatabaseLoading.R")
-  # source("helpers/DescriptiveStat.R")
-  # source("helpers/Histo.R")
-  # source("helpers/NormalityTest.R")
-  # source("helpers/TolInt.R")
-  # source("helpers/Plots.R")
   
   #### LOAD DATABASE ----------------------------------------------------------------------------------------------------
   # Define a reactive variable to store the data from the uploaded file
@@ -272,16 +266,4 @@ server <- function(input, output, session) {
     SPEC()$histog
   })
  
-  
-  
-  # Download the Example Dataset
-  # output$Example <- downloadHandler(
-  #   filename <- function() {
-  #     paste("Data", "xlsx", sep=".")
-  #   },
-  #   
-  #   content <- function(ex) {
-  #     file.copy(source("www/Data.xlsx"), ex)
-  #   }
-  # )
 }
