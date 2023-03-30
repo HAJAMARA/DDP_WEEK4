@@ -1,4 +1,4 @@
-# SpecLim Calculator: 
+# SpecLim Calculator 
 Created to validate the [Shiny Application and Reproducible Pitch Coursera Project](https://www.coursera.org/learn/data-products?specialization=data-science-statistics-machine-learning) 
 
 This **SpecLimits Calculator** RShiny app is built to facilitate the setting of those specification limits for process parameters having **at least** an historical of **20 batch results**.
