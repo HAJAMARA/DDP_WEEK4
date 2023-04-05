@@ -11,7 +11,7 @@ In that case, the specifications limits assessment is based on the following sta
 
     - if the log-normality is not rejected then, the specification limits will be based on a confidence-coverage tolerance interval (2-sided, or upper limit or lower limit) using the log-transformed data. The limits will then be back-transformed.
     - else (if the log-normality is rejected), the distribution is unknown and a non-parametric approach will be used (Parametric capability-based limits) 
-    - 
+  
 
 See the **RShiny app** [here](https://hajeramara.shinyapps.io/SpecLim/)
 
